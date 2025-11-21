@@ -11,6 +11,7 @@ import { nanoid } from "nanoid"
 import { CloudinaryStorage } from "multer-storage-cloudinary"
 import { v2 as cloudinary } from "cloudinary"
 import dotenv from "dotenv"
+import nodemailer from "nodemailer";
 dotenv.config()
 
 
@@ -56,46 +57,56 @@ router.get("/signup",(req,res)=>{
 
 ////////  POST  /////////
 
-import { Resend } from "resend";
+// import { Resend } from "resend";
 
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_APP_PASSWORD, // use App Password if 2FA is enabled
+  },
+  port: 465,      // SSL port
+  secure: true,   // true for 465, false for 587
+});
 
 router.post("/signup", async (req, res) => {
-    try {
-        const { userid, email } = req.body;
-        const password = nanoid(9);
+  try {
+    const { userid, email } = req.body;
+    const password = nanoid(9);
 
-        // Check if user already exists
-        const exists = await accounts.findOne({ email });
-        if (exists) {
-            return res.render("signup", { error: "Email already exists" });
-        }
-
-        // Initialize Resend
-        const resend = new Resend(process.env.RESEND_API_KEY);
-
-        // Try sending email
-        try {
-            await resend.emails.send({
-                from: "Postify <onboarding@resend.dev>",
-                to: email,
-                subject: "Postify - Your Temporary Password",
-                text: `Your temporary password is: ${password}. Please change it after signing in.`,
-            });
-
-            // Save user only if email was sent successfully
-            const data = new accounts({ userid, email, password });
-            await data.save();
-
-            return res.redirect("/signin");
-        } catch (mailErr) {
-            console.log(mailErr);
-            return res.render("signup", { error: "Could not send email. Try again." });
-        }
-
-    } catch (err) {
-        console.log(err)
-        return res.render("signup", { error: "Something went wrong" });
+    // Check if user already exists
+    const exists = await accounts.findOne({ email });
+    if (exists) {
+      return res.render("signup", { error: "Email already exists" });
     }
+
+    // Define mail info
+    const mailOptions = {
+      from: process.env.GMAIL_USER,
+      to: email,
+      subject: "Postify - Your Temporary Password",
+      text: `Your temporary password is: ${password}. Please change it after signing in.`,
+    };
+
+    // Try sending email
+    try {
+      await transporter.sendMail(mailOptions);
+
+      // Save user only if email was sent successfully
+      const data = new accounts({ userid, email, password });
+      await data.save();
+
+      return res.redirect("/signin");
+    } catch (mailErr) {
+      console.log(mailErr);
+      return res.render("signup", { error: "Could not send email. Check the email address." });
+    }
+
+  } catch (err) {
+    console.log(err);
+    return res.render("signup", { error: "Something went wrong" });
+  }
 });
 
 
