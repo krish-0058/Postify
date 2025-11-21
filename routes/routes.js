@@ -97,6 +97,7 @@ router.post("/signup", async (req, res) => {
 
             return res.redirect("/signin");
         } catch (mailErr) {
+            console.log(mailErr)
             return res.render("signup", { error: "Email address not found" });
         }
 
