@@ -1,21 +1,17 @@
-const express = require("express")
+import express from "express"
 const router = express.Router()
 
-
-
-
-const accounts = require("../models/accounts")
-const posts = require("../models/posts")
-const Comments = require("../models/comments")
-const cookieParser = require("cookie-parser")
-const {checkForCookie,redirectAuthentication} = require('../middlewares/authentications')
-const multer = require('multer')
-const {nanoid} = require("nanoid")
-const nodemailer = require("nodemailer");
-
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const cloudinary = require('cloudinary').v2;
-require("dotenv").config();
+import accounts from "../models/accounts.js"
+import posts from "../models/posts.js"
+import Comments from "../models/comments.js"
+import cookieParser from "cookie-parser"
+import { checkForCookie, redirectAuthentication } from "../middlewares/authentications.js"
+import multer from "multer"
+import { nanoid } from "nanoid"
+import { CloudinaryStorage } from "multer-storage-cloudinary"
+import { v2 as cloudinary } from "cloudinary"
+import dotenv from "dotenv"
+dotenv.config()
 
 
 
@@ -60,6 +56,9 @@ router.get("/signup",(req,res)=>{
 
 ////////  POST  /////////
 
+import { Resend } from "resend";
+
+
 router.post("/signup", async (req, res) => {
     try {
         const { userid, email } = req.body;
@@ -71,41 +70,34 @@ router.post("/signup", async (req, res) => {
             return res.render("signup", { error: "Email already exists" });
         }
 
-        // Setup transporter
-        let transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS,
-            },
-        });
-
-        // Define mail info
-        let mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: "postify",
-            text: `Your temporary password is: ${password}. Please change it after Sign in.`,
-        };
+        // Initialize Resend
+        const resend = new Resend(process.env.RESEND_API_KEY);
 
         // Try sending email
         try {
-            await transporter.sendMail(mailOptions);
-             
+            await resend.emails.send({
+                from: "Postify <onboarding@resend.dev>",
+                to: email,
+                subject: "Postify - Your Temporary Password",
+                text: `Your temporary password is: ${password}. Please change it after signing in.`,
+            });
+
+            // Save user only if email was sent successfully
             const data = new accounts({ userid, email, password });
             await data.save();
 
             return res.redirect("/signin");
         } catch (mailErr) {
-            console.log(mailErr)
-            return res.render("signup", { error: "Email address not found" });
+            console.log(mailErr);
+            return res.render("signup", { error: "Could not send email. Try again." });
         }
 
-       
     } catch (err) {
+        console.log(err)
         return res.render("signup", { error: "Something went wrong" });
     }
 });
+
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -966,4 +958,4 @@ router.use(function(req,res){
     res.redirect("/home")
 })
 
-module.exports = router
+export default router

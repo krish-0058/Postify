@@ -1,32 +1,28 @@
-const express = require("express");
-const path = require("path");
-const mongoose = require("mongoose");
-const Router = require("./routes/routes")
-const app = express();
-require("dotenv").config();
+import express from "express";
+import path from "path";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import routes from "./routes/routes.js"; // ES module import
 
+dotenv.config();
 
+const app = express(); // create Express app
 
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-.then(()=>console.log("Connection Established"))
-.catch(()=>console.log("Failed to connect"));
+  .then(() => console.log("Connection Established"))
+  .catch(err => console.log("Failed to connect", err));
 
-
-
-
+// Middleware
 app.use(express.static("public"));
-app.use(express.urlencoded({extended:false}));
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 
-app.use("/",Router)
+// Set view engine
+app.set("view engine", "ejs");
+app.set("views", path.join(path.resolve(), "views")); // fixed path
 
+// Routes
+app.use("/", routes);
 
-
-
-
-
-app.set("view engine","ejs");
-app.set("./views",path.join("views"));
-
-
-app.listen(3000,()=>console.log("Server started"))
+// Start server
+app.listen(3000, () => console.log("Server started on port 3000"));
