@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile</title>
+  <link rel="icon" href="/images/postify.png" type="image/png">
+  <link rel="stylesheet" href="/styles/navbar.css" />
+  <link rel="stylesheet" href="/styles/edit-bio.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <%- include('partials/navbar') %>
+
+
+
+
+  <!-- Edit Profile Form -->
+  <form class="edit-profile-container" action="/edit-bio" method="POST", enctype="multipart/form-data">
+
+
+    
+    <!-- Top Section -->
+    <div class="top-section">
+      <div class="left-photo">
+        <img src=<%= profile %> alt="Current Profile" class="edit-profile-img" id="profilePic" />
+      </div>
+      <div class="right-actions">
+        <label for="photo" class="upload-btn">Update Photo</label>
+        <input type="file" id="photo" name="profile" style="display: none;">
+      </div>
+    </div>
+
+
+
+
+
+    <!-- Bio Section -->
+    <div class="bio-section">
+      <label for="bio">Bio:</label>
+      <textarea id="bio" name="bio" placeholder="Tell about yourself..." maxlength="50"><%= bio %></textarea>
+    </div>
+
+
+
+
+
+    <!-- Save Button -->
+    <div class="save-btn-wrapper">
+      <button type="submit" class="save-btn">Save Changes</button>
+    </div>
+  </form>
+
+
+
+
+  <script>
+    let profilePic = document.getElementById("profilePic")
+    let inputPic = document.getElementById("photo")
+
+    inputPic.onchange = function(){
+      profilePic.src = URL.createObjectURL(inputPic.files[0])
+    }
+  </script>
+
+</body>
+</html>

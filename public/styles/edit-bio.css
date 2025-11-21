@@ -1,0 +1,105 @@
+.edit-profile-container {
+  margin-left: 240px;
+  padding: 70px 40px 40px;
+  max-width: 800px;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .edit-profile-container {
+    margin-left: 0;
+    padding: 110px 30px 0px;
+  }
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.left-photo {
+  flex: 1;
+}
+
+.edit-profile-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #61dafb;
+}
+
+.right-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.upload-btn {
+  background-color: #61dafb;
+  color: #000;
+  padding: 10px 20px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background-color: #3cbde8;
+  transform: scale(1.05);
+}
+
+.bio-section {
+  margin-bottom: 30px;
+}
+
+.bio-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.bio-section textarea {
+  width: 100%;
+  min-height: 120px;
+  background-color: #1b1b2b;
+  border: 2px solid #2c2f44;
+  border-radius: 10px;
+  color: #e2e8f0;
+  padding: 15px;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border 0.3s;
+}
+
+.bio-section textarea:focus {
+  outline: none;
+  border-color: #61dafb;
+}
+
+.save-btn-wrapper {
+  text-align: left;
+}
+
+.save-btn {
+  background-color: #61dafb;
+  color: #000;
+  padding: 12px 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-btn:hover {
+  background-color: #3cbde8;
+  transform: scale(1.05);
+}

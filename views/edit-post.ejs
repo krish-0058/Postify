@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Post</title>
+  <link rel="icon" href="/images/postify.png" type="image/png">
+  <link rel="stylesheet" href="/styles/navbar.css" />
+  <link rel="stylesheet" href="/styles/post.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <%- include('partials/navbar') %>
+
+
+  <!-- Main Section -->
+  <div class="profile-container">
+    <form action="/edit/<%= post._id %>" method="POST" enctype="multipart/form-data" class="post-form">
+
+      <!-- Title -->
+      <input
+        type="text"
+        name="title"
+        class="post-title"
+        placeholder="Title here..."
+        value="<%=post.title %>"
+        required
+      />
+
+
+
+
+      <!-- Description -->
+      <textarea
+        name="description"
+        class="post-description"
+        placeholder="What's on your mind?"
+        rows="6"
+      ><%= post.description %> </textarea>
+
+
+    <!-- Media Upload Section -->
+
+    <div class="top-section" style="position: relative; display: inline-block;">
+      <label for="photo" class="left-photo clickable-photo">
+
+        <% if (post.media) { %>
+            <img src="<%= post.media %>" 
+                alt="Current Profile" 
+                class="edit-profile-img" 
+                id="profilePic" />
+        <% } else { %>
+            <img src="/images/media.png" 
+                alt="Default Image" 
+                class="edit-profile-img" 
+                id="profilePic" />
+        <% } %>
+
+        </label>
+
+        <!-- Remove Button -->
+        <button type="button" id="removeImageBtn" class="remove-image-btn">✖</button>
+
+        <input type="file" id="photo" name="media" style="display:none;">
+    </div>
+
+    <input type="hidden" id="removeImageFlag" name="removeImage" value="false">
+
+
+
+
+
+
+
+
+
+      <!-- Submit Button -->
+      <div class="btn-wrapper">
+        <button type="submit" class="post-btn">Edit Post</button>
+      </div>
+    </form>
+
+     <form action="/delete/<%= post._id %>" method="POST" class="delete-form">
+    <button type="submit" class="delete-btn">Delete Post</button>
+</form>
+    </form>
+    
+  </div>
+
+</body>
+
+
+
+  <script>
+    let profilePic = document.getElementById("profilePic")
+    let inputPic = document.getElementById("photo")
+    let deletePic = document.getElementById("removeImageBtn")
+
+    
+    inputPic.onchange = function(){
+      profilePic.src = URL.createObjectURL(inputPic.files[0])
+    }
+
+    deletePic.onclick = function(){
+        profilePic.src = "/images/media.png"
+        inputPic.value = ""
+        document.getElementById("removeImageFlag").value = "true"
+    }
+  </script>
+
+</html>

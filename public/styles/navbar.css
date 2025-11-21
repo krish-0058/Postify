@@ -1,0 +1,197 @@
+.top-navbar{
+  display: none;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0f0f1c;
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Sidebar navbar */
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 220px;
+  background: #111827;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.logo {
+  color: #61dafb;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.nav-links {
+  list-style: none;
+  padding-left: 0;
+}
+
+.nav-links li {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  display: flex;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.nav-links a:hover {
+  background: #1f2937;
+  color: #61dafb;
+}
+
+img{
+    height: 35px;
+    width: auto;
+}
+
+
+/* Hide navbar on small screens */
+@media (max-width: 600px) {
+  .navbar {
+    display: none;
+  }
+
+
+  /* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f0f1c, #1e1e2f);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Top navbar */
+.top-navbar {
+  width: 100%;
+  height: 70px;
+  background-color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.top-logo {
+  color: #61dafb;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.top-nav-links {
+  display: flex;
+  list-style: none;
+  gap: 3vw;
+}
+
+.top-nav-links li {
+  margin-left: 25px;
+}
+
+.top-nav-links a {
+  color: white;
+  font-size: 1.4rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.top-nav-links a:hover {
+  color: #61dafb;
+  transform: scale(1.2);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsive: Top Navbar for <= 550px */
+@media (max-width: 550px) {
+
+  .top-navbar {
+    padding: 0 15px;
+    height: 65px;
+    justify-content: center; 
+  }
+
+  /* Hide postify text */
+  .top-logo {
+    display: none;
+  }
+
+  /* Nav icons row */
+  .top-nav-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;   /* even spacing everywhere */
+    align-items: center;
+    gap: 0;                           /* no random spacing */
+    padding: 0;
+  }
+
+  .top-nav-links li {
+    margin: 0;
+  }
+
+  /* Icon size smaller for mobile */
+  .top-nav-links img {
+    height: 28px;
+    width: auto;
+  }
+}

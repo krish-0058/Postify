@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In</title>
+  <link rel="icon" href="/images/postify.png" type="image/png">
+  <link rel="stylesheet" href="/styles/sign.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+
+    <% if(error){ %>
+      <div class="error">
+        <%= error %>
+      </div>
+    <% } %>
+
+
+
+    <form class="signup-form" method="post" action="/signin">
+      <h2>Sign In</h2>
+      <input type="email" placeholder="Email Address" name="email" autocomplete="off" required />
+      <input type="password" placeholder="Password" name="password" autocomplete="off" required />
+      <button type="submit">Sign In</button>
+      <p>Create New Account? <a href="/signup">Create</a></p>
+    </form>
+    
+  </div>
+
+</body>
+</html>

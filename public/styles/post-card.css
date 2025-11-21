@@ -1,0 +1,257 @@
+
+/* Main container */
+.post-wrapper {
+  margin-left: 240px;
+  padding: 30px 20px 0 20px;
+  max-width: 900px;
+}
+
+/* Post card */
+.post-card {
+  margin-top: 3vh;
+  background-color: #1e2235;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 24px 30px;
+  border-radius: 14px;
+  color: #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: transform 0.2s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Top: User Info */
+.post-user-info {
+  display: flex;
+  align-items: flex-start; /* Align image with top of text */
+  gap: 15px;
+}
+
+.post-user-img {
+  width: 58px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #61dafb;
+  flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.post-user-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.post-username,
+.post-user-desc {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  line-height: 1.2;
+}
+
+.post-username {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #61dafb;
+  font-weight: 600;
+}
+
+.post-user-desc {
+  font-size: 0.85rem;
+  color: #a0aec0;
+  margin-top: 2px;
+}
+
+.post-date{
+  font-size: 0.75rem;
+  color: #c1cfe2;
+  margin-top: 5px;
+}
+
+
+/* Middle: Post Content */
+.post-content {
+  border-top: 1px solid #39425d;
+  padding-top: 16px;
+}
+
+.post-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 10px;
+}
+
+.post-description {
+  font-size: 1rem;
+  color: #d1d5db;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+
+
+
+
+
+/* Image wrapper (full width like post card) */
+.post-image-wrapper {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;    /* center the image */
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #141827; /* optional backdrop */
+  padding: 10px;             /* spacing around the image */
+}
+
+/* Image */
+.post-image {
+  width: 70%;                /* 70% of card width */
+  height: auto;              /* keep natural aspect ratio */
+  object-fit: contain;       /* show FULL image without cropping */
+  border-radius: 12px;
+  max-height: 500px;         /* prevents long portrait images */
+}
+
+/* Optional hover */
+.post-image:hover {
+  transform: scale(1.02);
+  transition: 0.25s ease;
+}
+
+
+
+
+
+
+
+
+/* Bottom: Actions */
+.post-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.comment-btn {
+  background-color: #1f2937;
+  color: #61dafb;
+  border: 1px solid #61dafb;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.comment-btn:hover {
+  background-color: #61dafb;
+  color: #000;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .post-wrapper {
+    margin-left: 0;
+    padding: 10.5vh 5vw 0 5vw;
+  }
+
+  .post-card {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .post-image {
+    width: 97%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* /////////////////////////////////// Search Bar //////////////////// */
+
+
+/* Search Form: match post-card width */
+.searchForm {
+  margin-bottom: 20px; /* spacing from posts */
+}
+
+.searchBar {
+  display: flex;
+  width: 100%;
+  background-color: #1e2235; /* same as post-card */
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.searchBar input[type="search"] {
+  flex: 1; /* take full remaining width */
+  padding: 12px 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent; /* inherits dark card background */
+  color: #fff;
+}
+
+.searchBar input[type="search"]::placeholder {
+  color: #b3b3b3;
+}
+
+.searchBar button.searchIcon {
+  background-color: #1f2937; /* matches your theme */
+  color: #61dafb;
+  border: none;
+  cursor: pointer;
+  padding: 0 25px;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.searchBar button.searchIcon:hover {
+  background-color: #61dafb;
+  color: #000;
+}
+
+/* /////////////////////////////////////////////////////////////////////////////// */
+
+
+
+
+
+
+.link{
+  text-decoration: none;
+}
+
+
+.post-description {
+  white-space: pre-wrap;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/styles/navbar.css" />
+<link rel="icon" href="/images/postify.png" type="image/png">
+<link rel="stylesheet" href="/styles/post-comment.css" />
+<title>Post & Comments</title>
+</head>
+<body>
+
+<%- include('./partials/navbar') %>
+
+<main class="post-wrapper">
+  <div class="post-card">
+
+
+
+
+    <!-- User Info -->
+    <div class="post-user-info">
+      <a class="link" href="/profile/<%= posts.createdBy.userid %>">
+        <img src="<%= posts.createdBy.profile %>" alt="User Photo" class="post-user-img" />
+      </a>
+      <div class="post-user-text">
+        <a class="link" href="/profile/<%= posts.createdBy.userid %>">
+          <h3 class="post-username"><%= posts.createdBy.userid %></h3>
+        </a> 
+        <p class="post-user-desc"><%= posts.createdBy.bio %></p>
+        <p class="post-date"><%=posts.createdAt.toDateString()%></p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Post Content -->
+    <div class="post-content">
+      <h2 class="post-title"><%= posts.title %></h2>
+      <p class="post-description"><%= posts.description %></p>
+      <% if (posts.media) { %>
+        <div class="post-image-wrapper">
+          <img src="<%= posts.media %>" alt="Post Image" class="post-image">
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+
+  <div class="comments-section">
+  <h3>Comments</h3>
+
+  <% if (comments.length === 0) { %>
+    <p>No comments yet. Be the first to comment!</p>
+  <% } else { %>
+    <% comments.forEach(comment => { %>
+      <div class="comment">
+        <a class="link" href="/profile/<%= comment.commentedBy.userid %>">
+          <img src="<%= comment.commentedBy.profile %>" alt="user" class="comment-user-img">
+        </a>
+        <div class="comment-content">
+          <a class="link" href="/profile/<%= comment.commentedBy.userid %>">
+            <div class="comment-user-name"><%= comment.commentedBy.userid %></div>
+          </a>
+          <div class="comment-text"><%= comment.comments %></div>
+          <div class="comment-date"><%= comment.commentedDate.toDateString() %></div>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+</div>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <!-- Add Comment -->
+  <form action="/comments/<%= posts._id %>" method="POST" class="add-comment">
+    <input type="hidden" name="postId" value="<%= posts._id %>">
+    <input type="text" placeholder="Write a comment..." class="textarea" name="comments" autocomplete="off" required></textarea>
+    <button type="submit" class="send-comment-btn">💬 Comment</button>
+  </form>
+</div>
+
+</main>
+
+</body>
+</html>

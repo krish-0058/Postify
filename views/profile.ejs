@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile</title>
+  <link rel="icon" href="/images/postify.png" type="image/png">
+  <link rel="stylesheet" href="/styles/navbar.css" />
+  <link rel="stylesheet" href="/styles/profile.css" />
+  <link rel="stylesheet" href="/styles/post-card.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Reusable Navbar -->
+  <%- include('./partials/navbar') %>
+
+
+
+  <!-- Main Profile Content -->
+  <div class="profile-container">
+    <div class="profile-top">
+      <div class="profile-left">
+        <img src=<%= profile %> alt="Profile Picture" class="profile-img" />
+      </div>
+      <div class="profile-right">
+        <h2><%= userid %></h2>
+        <p><%= bio %></p>
+        <a href="/post"><button class="post-btn">Create Post</button></a>
+        <a href="/edit-bio"><button class="post-btn">Edit Bio</button></a>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+  </div>
+
+
+
+
+
+
+
+<div class="post-wrapper">
+  <% posts.forEach(post => { %>
+   
+    <div class="post-card">
+
+      <!-- Top: User Info -->
+      <div class="post-user-info">
+        <img src=<%= post.createdBy.profile %> alt="User Photo" class="post-user-img" />
+        <div class="ost-user-text">
+          <h3 class="post-username"><%= post.createdBy.userid %></h3>
+          <p class="post-user-desc"><%= post.createdBy.bio %></p>
+          <p class="post-date"><%=post.createdAt.toDateString()%></p>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- Middle: Post Content -->
+      <div class="post-content">
+        <h2 class="post-title"><%= post.title %></h2>
+        <p class="post-description">
+          <%= post.description %>
+        </p>
+        <% if (post.media) { %>
+        <div class="post-image-wrapper">
+          <img src="<%= post.media %>" alt="Post Image" class="post-image">
+        </div>
+      <% } %>
+      </div>
+
+
+
+
+
+      <!-- Bottom: Actions -->
+      <div class="post-actions">
+        <form action="/edit/<%= post._id %>" method="get">
+        <button class="comment-btn" style="margin-right: 20px;">Edit ✏️</button>
+        </form>
+
+        <form action="/comments/<%= post._id %>" method="get">
+        <button type="submit" class="comment-btn">💬 Comment</button>
+        </form>
+      </div>
+
+    </div>
+    <% }) %>
+
+
+    
+  </div>
+
+</body>
+</html>

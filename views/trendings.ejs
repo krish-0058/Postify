@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/images/postify.png" type="image/png">
+    <link rel="stylesheet" href="/styles/navbar.css" />
+    <link rel="stylesheet" href="/styles/post-card.css" />
+    <title>Trendings</title>
+</head>
+<body>
+    
+  <%- include('./partials/navbar') %>
+
+
+
+  <div class="post-wrapper">
+  <% posts.forEach(post => { %>
+   
+    <div class="post-card">
+
+      <!-- Top: User Info -->
+      <div class="post-user-info">
+        <a class="link" href="/profile/<%= post.createdBy.userid %>">
+          <img src=<%= post.createdBy.profile %> alt="User Photo" class="post-user-img" />
+        </a>
+        <div class="ost-user-text">
+          <a class="link" href="/profile/<%= post.createdBy.userid %>">
+            <h3 class="post-username"><%= post.createdBy.userid %></h3>
+          </a>
+          <p class="post-user-desc"><%= post.createdBy.bio %></p>
+          <p class="post-date"><%=post.createdAt.toDateString()%></p>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- Middle: Post Content -->
+      <div class="post-content">
+        <h2 class="post-title"><%= post.title %></h2>
+        <p class="post-description">
+          <%= post.description %>
+        </p>
+        <% if (post.media) { %>
+        <div class="post-image-wrapper">
+          <img src="<%= post.media %>" alt="Post Image" class="post-image">
+        </div>
+      <% } %>
+      </div>
+
+
+
+
+
+      <!-- Bottom: Actions -->
+      <div class="post-actions">
+        <form action="/comments/<%= post._id %>" method="get">
+        <button type="submit" class="comment-btn">💬 Comment</button>
+        </form>
+      </div>
+
+    </div>
+    <% }) %>
+
+
+  </div>
+  
+</body>
+</html>
