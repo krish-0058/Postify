@@ -61,9 +61,11 @@
       <!-- Middle: Post Content -->
       <div class="post-content">
         <h2 class="post-title"><%= post.title %></h2>
-        <p class="post-description">
-          <%= post.description %>
-        </p>
+          <% if(post.description != "") {%>
+          <p class="post-description">
+            <%= post.description %>
+          </p>
+        <% } %>
         <% if (post.media) { %>
         <div class="post-image-wrapper">
           <img src="<%= post.media %>" alt="Post Image" class="post-image">
