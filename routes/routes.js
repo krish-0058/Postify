@@ -322,7 +322,6 @@ router.get("/profile",redirectAuthentication, async(req,res)=>{
     try{
         const user = await accounts.findById(req.user)
         
-        
         if(!user){
             return res.redirect('signin')
         }
